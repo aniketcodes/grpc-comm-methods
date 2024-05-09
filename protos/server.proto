@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+message News {
+    string id =1;
+    string title = 2;
+    string body = 3;
+    int32 viewCount = 4;
+}
+
+message Empty {};
+message NewsList {
+    repeated News news = 1;
+}
+
+
+service NewsService {
+    rpc GetNews(Empty) returns (NewsList) {}
+    rpc ClientStreamNews(stream News) returns (NewsList) {}
+    rpc BiDirectionalNews (stream News) returns (stream NewsList) {}
+    rpc ServerStreamNews(Empty) returns (stream News) {}
+}
